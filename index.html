@@ -23,11 +23,8 @@
             <div class="qr-big-card">
                 <div class="label">Scan to get a bingo card</div>
                 <div class="qr-canvas-wrap" id="qr-wrap-main"></div>
-                <div class="qr-actions" style="margin-top:1rem;">
-                    <button class="btn" onclick="simulateScan()">Simulate scan</button>
+                <div class="qr-actions">
                     <button class="btn" onclick="resetCounter()">Reset counter</button>
-                    <button class="btn" onclick="downloadQR()">Download QR</button>
-                    <button class="btn primary" onclick="printQR()">Print QR</button>
                 </div>
             </div>
 
@@ -48,34 +45,16 @@
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════
-     PLAYER CARD VIEW  (shown when ?card=N)
-════════════════════════════════════════ -->
+    <!-- USER CARD VIEW -->
     <div id="card-view">
-        <div class="card-header">
-            <h2>B · I · N · G · O</h2>
-            <div class="card-num" id="card-label"></div>
-        </div>
-
-        <div class="win-banner" id="win-banner"> BINGO! </div>
-
         <div class="bingo-image-wrap" id="card-image-wrap"></div>
         <div class="image-only-actions" id="image-only-actions">
             <a class="btn primary" id="download-card-link" href="#" download>Download Card Image</a>
         </div>
-
-        <div class="bingo-grid-wrap">
-            <div class="bingo-header-row">
-                <span>B</span><span>I</span><span>N</span><span>G</span><span>O</span>
-            </div>
-            <div class="bingo-grid" id="bingo-grid"></div>
-        </div>
     </div>
 
     <script>
-        // ─────────────────────────────────────────
-        //  CONFIGURATION
-        // ─────────────────────────────────────────
+        // --------------------------- CONFIG ---------------------------
 
         const CARD_IMAGES = [
             "./img/card1.png",
@@ -85,37 +64,21 @@
             "./img/card5.png",
         ];
 
-        const CARD_NAMES = [
-            "Card Variation 1",
-            "Card Variation 2",
-            "Card Variation 3",
-            "Card Variation 4",
-            "Card Variation 5",
-        ];
-
         const TOTAL_CARDS = 5;
         const STORAGE_KEY = 'bingo_scan_count';
-
-        // -------------------------------- ROUTING -------------------------------- 
 
         const params = new URLSearchParams(location.search);
 
         if (params.get('scan') === '1') {
-            // Someone scanned the QR — increment counter, redirect to their assigned image-only view
             const count = incrementAndGet();
             const assignedIdx = (count - 1) % TOTAL_CARDS;
             location.replace(location.origin + location.pathname + '?image=1&card=' + (assignedIdx + 1));
         } else if (params.get('image') === '1' && params.get('card') !== null) {
             const idx = Math.min(Math.max(parseInt(params.get('card'), 10) - 1, 0), TOTAL_CARDS - 1);
             showImageOnlyView(idx);
-        } else if (params.get('card') !== null) {
-            const idx = Math.min(Math.max(parseInt(params.get('card'), 10) - 1, 0), TOTAL_CARDS - 1);
-            showCardView(idx);
         } else {
             buildAdminPanel();
         }
-
-        // -------------------------------- COUNTER -------------------------------- 
 
         function getScanCount() {
             return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
@@ -126,8 +89,6 @@
             localStorage.setItem(STORAGE_KEY, next);
             return next;
         }
-
-        // -------------------------------- ADMIN PANEL -------------------------------- 
 
         function buildAdminPanel() {
             document.getElementById('admin-panel').style.display = 'block';
@@ -150,14 +111,7 @@
             const count = getScanCount();
             const nextIdx = count % TOTAL_CARDS;
             document.getElementById('counter-display').textContent = count;
-            document.getElementById('next-card-label').textContent = CARD_NAMES[nextIdx];
-        }
-
-        function simulateScan() {
-            const count = incrementAndGet();
-            const assignedIdx = (count - 1) % TOTAL_CARDS;
-            updateCounterDisplay();
-            window.open('?image=1&card=' + (assignedIdx + 1), '_blank');
+            document.getElementById('next-card-label').textContent = 'Card ' + (nextIdx + 1);
         }
 
         function resetCounter() {
@@ -167,49 +121,9 @@
             }
         }
 
-        function downloadQR() {
-            const wrap = document.getElementById('qr-wrap-main');
-            const canvas = wrap.querySelector('canvas');
-            if (!canvas) { alert('QR not ready yet — wait a moment and try again.'); return; }
-            const a = document.createElement('a');
-            a.download = 'bingo-qr-code.png';
-            a.href = canvas.toDataURL();
-            a.click();
-        }
-
-        function printQR() {
-            const srcCanvas = document.getElementById('qr-wrap-main').querySelector('canvas');
-            if (!srcCanvas) { alert('QR not ready yet — wait a moment and try again.'); return; }
-
-            const target = document.getElementById('print-qr-target');
-            target.innerHTML = '';
-
-            // Draw a larger version for print (300px)
-            const printCanvas = document.createElement('canvas');
-            printCanvas.width = 300;
-            printCanvas.height = 300;
-            const ctx = printCanvas.getContext('2d');
-            ctx.imageSmoothingEnabled = false;
-            ctx.drawImage(srcCanvas, 0, 0, 300, 300);
-            target.appendChild(printCanvas);
-
-            const scanUrl = location.origin + location.pathname + '?scan=1';
-            document.getElementById('print-url-label').textContent = scanUrl;
-
-            window.print();
-        }
-
-        // -------------------------- CARD VIEW -----------------------------------
-
-        let marked = new Set();
-
         function showImageOnlyView(idx) {
             const adminPanel = document.getElementById('admin-panel');
             const cardView = document.getElementById('card-view');
-            const cardHeader = document.querySelector('.card-header');
-            const gridWrap = document.querySelector('.bingo-grid-wrap');
-            const cardFooter = document.querySelector('.card-footer');
-            const winBanner = document.getElementById('win-banner');
             const imageWrap = document.getElementById('card-image-wrap');
             const imageOnlyActions = document.getElementById('image-only-actions');
             const downloadCardLink = document.getElementById('download-card-link');
@@ -220,10 +134,6 @@
             cardView.style.maxWidth = '720px';
             cardView.style.padding = '1rem';
 
-            if (cardHeader) cardHeader.style.display = 'none';
-            if (gridWrap) gridWrap.style.display = 'none';
-            if (cardFooter) cardFooter.style.display = 'none';
-            if (winBanner) winBanner.style.display = 'none';
             if (imageWrap) {
                 imageWrap.style.display = 'flex';
                 imageWrap.style.marginBottom = '1rem';
@@ -237,15 +147,6 @@
             buildCardImage(idx);
         }
 
-        function showCardView(idx) {
-            document.getElementById('admin-panel').style.display = 'none';
-            document.getElementById('card-view').style.display = 'block';
-            document.getElementById('card-label').textContent = CARD_NAMES[idx];
-            document.getElementById('image-only-actions').style.display = 'none';
-            buildCardImage(idx);
-            buildBingoGrid(idx);
-        }
-
         function buildCardImage(idx) {
             const wrap = document.getElementById('card-image-wrap');
             wrap.innerHTML = '';
@@ -253,14 +154,14 @@
             if (imgSrc) {
                 const img = document.createElement('img');
                 img.src = imgSrc;
-                img.alt = CARD_NAMES[idx];
+                img.alt = 'Bingo card ' + (idx + 1);
                 wrap.appendChild(img);
             } else {
                 wrap.innerHTML = `
       <div class="placeholder-img">
         <div class="img-icon">🃏</div>
         <div>
-          <strong>${CARD_NAMES[idx]}</strong>
+          <strong>Card ${idx + 1}</strong>
           Image placeholder — replace <code>CARD_IMAGES[${idx}]</code><br>with your actual image path
         </div>
       </div>`;
@@ -268,14 +169,6 @@
         }
 
     </script>
-    <!-- PRINT SHEET  (only visible when printing) -->
-    <div id="print-sheet">
-        <h2>Scan for Your Bingo Card</h2>
-        <p>Each scan gives you a unique card variation</p>
-        <div id="print-qr-target"></div>
-        <div class="print-url" id="print-url-label"></div>
-    </div>
-
 </body>
 
 </html>

@@ -41,19 +41,33 @@ body {
 .admin-header {
     text-align: center;
     margin-bottom: 2rem;
-    padding: 1.4rem 1rem 1.2rem;
-    background: var(--white);
+    padding: 1.5rem 1rem 1.3rem;
+    background:
+        linear-gradient(180deg, rgba(197, 5, 12, 0.12), rgba(197, 5, 12, 0.02)),
+        var(--white);
     border: 2px solid var(--black);
     border-radius: 16px;
     box-shadow: var(--shadow);
+    position: relative;
+}
+
+.admin-header::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 6px;
+    margin: 1rem auto 0;
+    background: linear-gradient(90deg, var(--black), var(--red), var(--black));
+    border-radius: 999px;
 }
 
 .admin-header h1 {
     font-size: clamp(2.1rem, 5vw, 3.3rem);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: var(--red);
     font-weight: 800;
+    line-height: 1;
 }
 
 .admin-header p {
@@ -65,7 +79,7 @@ body {
 
 .admin-header .badge {
     display: inline-block;
-    background: var(--red);
+    background: var(--black);
     color: var(--white);
     font-family: inherit;
     font-size: 0.72rem;
@@ -79,19 +93,22 @@ body {
 .qr-single {
     display: flex;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: stretch;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .qr-big-card {
-    background: var(--card-bg);
+    background:
+        linear-gradient(180deg, rgba(197, 5, 12, 0.06), transparent 120px),
+        var(--card-bg);
     border: 2px solid var(--black);
     border-radius: 16px;
     padding: 1.4rem;
     text-align: center;
     min-width: 260px;
     box-shadow: var(--shadow);
+    flex: 1 1 360px;
 }
 
 .counter-box {
@@ -101,25 +118,29 @@ body {
     border-radius: 16px;
     padding: 1.3rem 1.6rem;
     text-align: center;
-    min-width: 160px;
+    min-width: 220px;
     box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .counter-label {
     font-family: sans-serif;
     font-size: 0.72rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    opacity: 0.7;
+    opacity: 0.8;
     margin-bottom: 0.4rem;
 }
 
 .counter-num {
     font-family: sans-serif;
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 800;
     line-height: 1;
     margin-bottom: 0.6rem;
+    color: #fff1f1;
 }
 
 .counter-next {
@@ -139,9 +160,9 @@ body {
 .qr-big-card .label {
     font-size: 0.76rem;
     font-family: inherit;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--red-deep);
     margin-bottom: 0.75rem;
     font-weight: 700;
 }
@@ -161,6 +182,7 @@ body {
     border-radius: 12px;
     padding: 10px;
     background: #fff;
+    box-shadow: inset 0 0 0 4px rgba(197, 5, 12, 0.08);
 }
 
 .qr-actions {
@@ -213,6 +235,9 @@ body {
     color: var(--muted);
     line-height: 1.6;
     box-shadow: var(--shadow);
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .admin-note strong {
