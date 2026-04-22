@@ -83,12 +83,14 @@
             document.getElementById('admin-panel').style.display = 'block';
 
             const scanUrl = location.origin + location.pathname + '?scan=1';
+            const qrWrap = document.getElementById('qr-wrap-main');
+            qrWrap.innerHTML = '';
             setTimeout(() => {
-                new QRCode(document.getElementById('qr-wrap-main'), {
+                new QRCode(qrWrap, {
                     text: scanUrl,
                     width: 180,
                     height: 180,
-                    colorDark: "#1a1a2e",
+                    colorDark: "#101010",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.M
                 });
