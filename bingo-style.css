@@ -1,0 +1,487 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ink: #1a1a2e;
+    --paper: #faf8f2;
+    --gold: #c9963a;
+    --gold-light: #f0d890;
+    --red: #c0392b;
+    --green: #2e7d52;
+    --card-bg: #ffffff;
+    --border: #d4c8a0;
+    --muted: #7a7060;
+    --called: #2e7d52;
+    --called-bg: #e8f5ee;
+    --free: #c9963a;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* ── ADMIN PANEL ─────────────────────────── */
+#admin-panel {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1.5rem;
+}
+
+.admin-header h1 {
+    font-size: 2.4rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: normal;
+}
+
+.admin-header p {
+    color: var(--muted);
+    margin-top: 0.4rem;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.admin-header .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.qr-single {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.qr-big-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    min-width: 220px;
+}
+
+.counter-box {
+    background: var(--ink);
+    color: var(--gold-light);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    min-width: 160px;
+}
+
+.counter-label {
+    font-family: sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.4rem;
+}
+
+.counter-num {
+    font-family: sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.6rem;
+}
+
+.counter-next {
+    font-family: sans-serif;
+    font-size: 0.78rem;
+    opacity: 0.8;
+}
+
+.counter-next strong {
+    display: block;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+    color: var(--gold-light);
+}
+
+.qr-card .label,
+.qr-big-card .label {
+    font-size: 0.75rem;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+}
+
+.qr-card .card-title,
+.qr-big-card .card-title {
+    font-size: 0.88rem;
+    font-weight: normal;
+    color: var(--muted);
+    margin-top: 0.8rem;
+    font-style: italic;
+    font-family: sans-serif;
+}
+
+.qr-canvas-wrap {
+    display: inline-block;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px;
+    background: #fff;
+}
+
+.qr-actions {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    font-family: sans-serif;
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.12s;
+}
+
+.btn:hover {
+    background: var(--gold-light);
+}
+
+.btn.primary {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+}
+
+.btn.primary:hover {
+    background: #2e2e4e;
+}
+
+.admin-note {
+    margin-top: 2.5rem;
+    padding: 1rem 1.25rem;
+    background: #f0ede4;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.admin-note strong {
+    color: var(--ink);
+    font-style: normal;
+}
+
+/* ── BINGO CARD VIEW ─────────────────────── */
+#card-view {
+    display: none;
+    min-height: 100vh;
+    padding: 1.5rem 1rem 3rem;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 1.2rem;
+}
+
+.card-header h2 {
+    font-size: 1.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.card-header .card-num {
+    font-family: sans-serif;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+}
+
+.bingo-image-wrap {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    position: relative;
+    background: #f5f0e8;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bingo-image-wrap img {
+    width: 100%;
+    display: block;
+}
+
+.placeholder-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    gap: 0.6rem;
+    color: var(--muted);
+    font-family: sans-serif;
+    font-size: 0.82rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.placeholder-img .img-icon {
+    font-size: 2.8rem;
+    opacity: 0.4;
+}
+
+.placeholder-img strong {
+    font-size: 1rem;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+/* Bingo grid */
+.bingo-grid-wrap {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.bingo-header-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: var(--ink);
+}
+
+.bingo-header-row span {
+    text-align: center;
+    padding: 0.55rem 0;
+    font-size: 1.15rem;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    color: var(--gold-light);
+}
+
+.bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: none;
+}
+
+.bingo-cell {
+    border: 0.5px solid var(--border);
+    text-align: center;
+    padding: 0.7rem 0.2rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    background: #fff;
+    user-select: none;
+    position: relative;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bingo-cell:hover {
+    background: #fdf7e8;
+}
+
+.bingo-cell.called {
+    background: var(--called-bg);
+    color: var(--called);
+}
+
+.bingo-cell.called::after {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2.5px solid var(--called);
+    pointer-events: none;
+}
+
+.bingo-cell.free-space {
+    background: #fff8e8;
+    color: var(--gold);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.card-footer .info {
+    font-family: sans-serif;
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.bingo-btn {
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    padding: 8px 20px;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.bingo-btn.reset {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    color: var(--ink);
+}
+
+.bingo-btn.bingo {
+    background: var(--gold);
+    color: #fff;
+}
+
+.bingo-btn.bingo:hover {
+    background: #b5872e;
+}
+
+/* WIN banner */
+.win-banner {
+    display: none;
+    text-align: center;
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── PRINT SHEET ─────────────────────────── */
+@media print {
+    @page {
+        margin: 1in;
+    }
+
+    body {
+        background: #fff !important;
+    }
+
+    #admin-panel,
+    #card-view {
+        display: none !important;
+    }
+
+    #print-sheet {
+        display: flex !important;
+    }
+}
+
+#print-sheet {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    font-family: Georgia, serif;
+    color: #1a1a2e;
+}
+
+#print-sheet h2 {
+    font-size: 1.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: normal;
+    margin-bottom: 0.3rem;
+}
+
+#print-sheet p {
+    font-size: 0.85rem;
+    color: #7a7060;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+#print-qr-target {
+    border: 2px solid #d4c8a0;
+    padding: 16px;
+    display: inline-block;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    background: #fff;
+}
+
+#print-sheet .print-url {
+    font-family: monospace;
+    font-size: 0.72rem;
+    color: #7a7060;
+    word-break: break-all;
+    max-width: 320px;
+}
