@@ -8,10 +8,9 @@
 
 :root {
     --ink: #111111;
-    --paper: #fff8f8;
+    --paper: #fff7f7;
     --red: #c5050c;
     --red-deep: #8b0000;
-    --red-soft: #f4d7d8;
     --white: #ffffff;
     --black: #101010;
     --card-bg: #ffffff;
@@ -19,16 +18,13 @@
     --muted: #5b5b5b;
     --called: #c5050c;
     --called-bg: #ffe4e5;
-    --free: #111111;
-    --shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
-    --shadow-strong: 0 20px 48px rgba(139, 0, 0, 0.18);
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 body {
-    font-family: "Trebuchet MS", "Arial Black", Arial, sans-serif;
+    font-family: "Trebuchet MS", Arial, sans-serif;
     background:
-        radial-gradient(circle at top, rgba(197, 5, 12, 0.12), transparent 34%),
-        repeating-linear-gradient(135deg, rgba(197, 5, 12, 0.04) 0 18px, rgba(255, 255, 255, 0.92) 18px 36px),
+        linear-gradient(180deg, rgba(197, 5, 12, 0.08), transparent 180px),
         var(--paper);
     color: var(--ink);
     min-height: 100vh;
@@ -37,48 +33,47 @@ body {
 
 /* ── ADMIN PANEL ─────────────────────────── */
 #admin-panel {
-    max-width: 960px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.25rem 3rem;
 }
 
 .admin-header {
     text-align: center;
-    margin-bottom: 3rem;
-    border-bottom: 4px solid var(--red);
-    padding-bottom: 1.75rem;
-    position: relative;
+    margin-bottom: 2rem;
+    padding: 1.4rem 1rem 1.2rem;
+    background: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
 }
 
 .admin-header h1 {
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    letter-spacing: 0.16em;
+    font-size: clamp(2.1rem, 5vw, 3.3rem);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
-    font-weight: 900;
-    text-shadow: 3px 3px 0 rgba(197, 5, 12, 0.14);
+    font-weight: 800;
 }
 
 .admin-header p {
     color: var(--muted);
-    margin-top: 0.65rem;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    margin-top: 0.55rem;
+    font-size: 0.98rem;
+    font-weight: 600;
 }
 
 .admin-header .badge {
     display: inline-block;
     background: var(--red);
     color: var(--white);
-    font-family: sans-serif;
+    font-family: inherit;
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
-    padding: 6px 14px;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
     border-radius: 999px;
-    margin-bottom: 0.8rem;
-    box-shadow: 0 8px 18px rgba(197, 5, 12, 0.28);
+    margin-bottom: 0.75rem;
 }
 
 .qr-single {
@@ -91,22 +86,20 @@ body {
 
 .qr-big-card {
     background: var(--card-bg);
-    border: 3px solid var(--black);
-    border-radius: 18px;
-    padding: 1.6rem;
+    border: 2px solid var(--black);
+    border-radius: 16px;
+    padding: 1.4rem;
     text-align: center;
-    min-width: 220px;
-    box-shadow: var(--shadow-strong);
-    position: relative;
-    overflow: hidden;
+    min-width: 260px;
+    box-shadow: var(--shadow);
 }
 
 .counter-box {
-    background: linear-gradient(180deg, var(--black), #2c2c2c);
+    background: var(--black);
     color: var(--white);
-    border: 3px solid var(--red);
-    border-radius: 18px;
-    padding: 1.5rem 2rem;
+    border: 2px solid var(--red);
+    border-radius: 16px;
+    padding: 1.3rem 1.6rem;
     text-align: center;
     min-width: 160px;
     box-shadow: var(--shadow);
@@ -139,36 +132,35 @@ body {
     display: block;
     font-size: 1rem;
     margin-top: 0.2rem;
-    color: #ffcccc;
+    color: var(--white);
 }
 
 .qr-card .label,
 .qr-big-card .label {
-    font-size: 0.78rem;
-    font-family: sans-serif;
-    letter-spacing: 0.18em;
+    font-size: 0.76rem;
+    font-family: inherit;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 0.8rem;
-    font-weight: 800;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
 }
 
 .qr-card .card-title,
 .qr-big-card .card-title {
     font-size: 0.88rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--muted);
     margin-top: 0.8rem;
-    font-family: sans-serif;
+    font-family: inherit;
 }
 
 .qr-canvas-wrap {
     display: inline-block;
-    border: 3px solid var(--black);
-    border-radius: 14px;
-    padding: 12px;
+    border: 2px solid var(--black);
+    border-radius: 12px;
+    padding: 10px;
     background: #fff;
-    box-shadow: inset 0 0 0 6px rgba(197, 5, 12, 0.08);
 }
 
 .qr-actions {
@@ -180,7 +172,7 @@ body {
 }
 
 .btn {
-    font-family: sans-serif;
+    font-family: inherit;
     font-size: 0.74rem;
     padding: 8px 14px;
     border-radius: 999px;
@@ -188,9 +180,9 @@ body {
     background: var(--white);
     color: var(--ink);
     cursor: pointer;
-    letter-spacing: 0.08em;
-    transition: transform 0.12s, background 0.12s, color 0.12s, box-shadow 0.12s;
-    font-weight: 800;
+    letter-spacing: 0.06em;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+    font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
 }
@@ -198,8 +190,7 @@ body {
 .btn:hover {
     background: var(--black);
     color: var(--white);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+    border-color: var(--black);
 }
 
 .btn.primary {
@@ -213,12 +204,11 @@ body {
 }
 
 .admin-note {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     padding: 1.1rem 1.25rem;
-    background: linear-gradient(135deg, rgba(197, 5, 12, 0.08), rgba(255, 255, 255, 0.92));
-    border: 2px solid rgba(197, 5, 12, 0.24);
-    border-left: 10px solid var(--red);
-    border-radius: 18px;
+    background: var(--white);
+    border: 2px dashed rgba(197, 5, 12, 0.55);
+    border-radius: 16px;
     font-size: 0.85rem;
     color: var(--muted);
     line-height: 1.6;
@@ -246,11 +236,10 @@ body {
 
 .card-header h2 {
     font-size: 2rem;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    font-weight: 900;
+    font-weight: 800;
     color: var(--red);
-    text-shadow: 2px 2px 0 rgba(16, 16, 16, 0.12);
 }
 
 .card-header .card-num {
@@ -263,12 +252,12 @@ body {
 }
 
 .bingo-image-wrap {
-    border: 3px solid var(--black);
-    border-radius: 18px;
+    border: 2px solid var(--black);
+    border-radius: 16px;
     overflow: hidden;
     margin-bottom: 1rem;
     position: relative;
-    background: linear-gradient(180deg, #ffffff, #fbe9e9);
+    background: #ffffff;
     min-height: 200px;
     display: flex;
     align-items: center;
@@ -315,8 +304,8 @@ body {
 
 /* Bingo grid */
 .bingo-grid-wrap {
-    border: 3px solid var(--black);
-    border-radius: 18px;
+    border: 2px solid var(--black);
+    border-radius: 16px;
     overflow: hidden;
     margin-bottom: 1rem;
     box-shadow: var(--shadow);
@@ -325,7 +314,7 @@ body {
 .bingo-header-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    background: linear-gradient(90deg, var(--red-deep), var(--red), var(--red-deep));
+    background: var(--red);
 }
 
 .bingo-header-row span {
@@ -398,13 +387,13 @@ body {
 }
 
 .card-footer .info {
-    font-family: sans-serif;
+    font-family: inherit;
     font-size: 0.75rem;
     color: var(--muted);
 }
 
 .bingo-btn {
-    font-family: sans-serif;
+    font-family: inherit;
     font-size: 0.8rem;
     padding: 8px 20px;
     border-radius: 24px;
@@ -433,13 +422,13 @@ body {
 .win-banner {
     display: none;
     text-align: center;
-    background: linear-gradient(90deg, var(--black), var(--red), var(--black));
+    background: var(--red);
     color: var(--white);
     padding: 0.9rem;
-    border-radius: 14px;
+    border-radius: 12px;
     margin-bottom: 1rem;
     font-size: 1.25rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     animation: pop 0.3s ease;
     box-shadow: var(--shadow);
@@ -490,9 +479,9 @@ body {
 
 #print-sheet h2 {
     font-size: 1.8rem;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    font-weight: 900;
+    font-weight: 800;
     margin-bottom: 0.3rem;
     color: var(--red);
 }
@@ -505,10 +494,10 @@ body {
 }
 
 #print-qr-target {
-    border: 3px solid var(--black);
+    border: 2px solid var(--black);
     padding: 16px;
     display: inline-block;
-    border-radius: 14px;
+    border-radius: 12px;
     margin-bottom: 1.2rem;
     background: #fff;
 }
@@ -521,30 +510,13 @@ body {
     max-width: 320px;
 }
 
-.qr-big-card::before,
-.counter-box::before,
-.bingo-grid-wrap::before {
-    content: "";
-    position: absolute;
-    inset: 0 auto auto 0;
-    width: 100%;
-    height: 10px;
-    background: repeating-linear-gradient(
-        90deg,
-        var(--red) 0 18px,
-        var(--white) 18px 36px,
-        var(--black) 36px 54px
-    );
-}
-
-.counter-box,
-.bingo-grid-wrap {
-    position: relative;
-}
-
 @media (max-width: 640px) {
     .admin-header h1 {
         letter-spacing: 0.1em;
+    }
+
+    #admin-panel {
+        padding: 1.25rem 1rem 2rem;
     }
 
     .qr-big-card,
