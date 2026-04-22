@@ -73,14 +73,6 @@
             </div>
             <div class="bingo-grid" id="bingo-grid"></div>
         </div>
-
-        <div class="card-footer">
-            <span class="info">Tap squares to mark · Tap again to unmark</span>
-            <div style="display:flex;gap:8px;">
-                <button class="bingo-btn reset" onclick="resetCard()">Reset</button>
-                <button class="bingo-btn bingo" onclick="checkBingo()">Check BINGO</button>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -106,14 +98,6 @@
 
         const TOTAL_CARDS = 5;
         const STORAGE_KEY = 'bingo_scan_count';
-
-        const CARD_NUMBERS = [
-            [[3, 7, 12, 1, 9], [18, 28, 22, 16, 30], [33, 41, 0, 38, 45], [49, 56, 52, 47, 60], [63, 71, 68, 75, 62]],
-            [[5, 14, 8, 2, 11], [17, 25, 29, 21, 19], [34, 43, 0, 37, 42], [51, 58, 47, 53, 60], [64, 70, 65, 73, 67]],
-            [[4, 10, 13, 6, 15], [20, 24, 27, 16, 23], [31, 44, 0, 39, 36], [46, 55, 59, 48, 57], [66, 72, 61, 74, 69]],
-            [[2, 9, 6, 13, 14], [22, 26, 19, 28, 17], [35, 40, 0, 44, 32], [50, 54, 58, 46, 61], [63, 68, 75, 70, 65]],
-            [[8, 1, 15, 11, 3], [27, 16, 21, 30, 23], [36, 42, 0, 33, 45], [56, 48, 61, 52, 59], [72, 64, 69, 67, 71]],
-        ];
 
         // ─────────────────────────────────────────
         //  ROUTING
@@ -281,67 +265,6 @@
             }
         }
 
-        function buildBingoGrid(idx) {
-            const grid = document.getElementById('bingo-grid');
-            grid.innerHTML = '';
-            const nums = CARD_NUMBERS[idx];
-            for (let row = 0; row < 5; row++) {
-                for (let col = 0; col < 5; col++) {
-                    const cell = document.createElement('div');
-                    cell.className = 'bingo-cell';
-                    cell.dataset.pos = `${col}-${row}`;
-                    if (col === 2 && row === 2) {
-                        cell.classList.add('free-space', 'called');
-                        cell.textContent = 'FREE';
-                        marked.add(`${col}-${row}`);
-                    } else {
-                        cell.textContent = nums[col][row];
-                        cell.onclick = () => toggleCell(cell);
-                    }
-                    grid.appendChild(cell);
-                }
-            }
-        }
-
-        function toggleCell(cell) {
-            const pos = cell.dataset.pos;
-            if (marked.has(pos)) { marked.delete(pos); cell.classList.remove('called'); }
-            else { marked.add(pos); cell.classList.add('called'); }
-            document.getElementById('win-banner').style.display = 'none';
-        }
-
-        function resetCard() {
-            marked.clear();
-            document.querySelectorAll('.bingo-cell').forEach(c => {
-                if (c.classList.contains('free-space')) { marked.add(c.dataset.pos); return; }
-                c.classList.remove('called');
-            });
-            document.getElementById('win-banner').style.display = 'none';
-        }
-
-        function checkBingo() {
-            const m = (c, r) => marked.has(`${c}-${r}`);
-            let bingo = false;
-            for (let i = 0; i < 5; i++) {
-                if ([0, 1, 2, 3, 4].every(j => m(j, i))) bingo = true;
-                if ([0, 1, 2, 3, 4].every(j => m(i, j))) bingo = true;
-            }
-            if ([0, 1, 2, 3, 4].every(i => m(i, i))) bingo = true;
-            if ([0, 1, 2, 3, 4].every(i => m(i, 4 - i))) bingo = true;
-
-            const banner = document.getElementById('win-banner');
-            if (bingo) {
-                banner.style.cssText = '';
-                banner.style.display = 'block';
-                banner.textContent = '🎉 BINGO! 🎉';
-            } else {
-                banner.style.display = 'block';
-                banner.style.background = '#7a7060';
-                banner.style.color = '#fff';
-                banner.textContent = 'Not yet — keep going!';
-                setTimeout(() => { banner.style.display = 'none'; banner.style.background = ''; banner.style.color = ''; }, 2200);
-            }
-        }
     </script>
     <!-- ═══════════════════════════════════════
      PRINT SHEET  (only visible when printing)
