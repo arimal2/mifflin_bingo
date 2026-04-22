@@ -122,10 +122,13 @@
         const params = new URLSearchParams(location.search);
 
         if (params.get('scan') === '1') {
-            // Someone scanned the QR — increment counter, redirect to their assigned card
+            // Someone scanned the QR — increment counter, redirect to their assigned image download
             const count = incrementAndGet();
             const assignedIdx = (count - 1) % TOTAL_CARDS;
-            location.replace(location.origin + location.pathname + '?card=' + (assignedIdx + 1));
+            location.replace(location.origin + location.pathname + '?download=1&card=' + (assignedIdx + 1));
+        } else if (params.get('download') === '1' && params.get('card') !== null) {
+            const idx = Math.min(Math.max(parseInt(params.get('card'), 10) - 1, 0), TOTAL_CARDS - 1);
+            downloadCardImage(idx);
         } else if (params.get('card') !== null) {
             const idx = Math.min(Math.max(parseInt(params.get('card'), 10) - 1, 0), TOTAL_CARDS - 1);
             showCardView(idx);
@@ -179,7 +182,7 @@
             const count = incrementAndGet();
             const assignedIdx = (count - 1) % TOTAL_CARDS;
             updateCounterDisplay();
-            window.open('?card=' + (assignedIdx + 1), '_blank');
+            window.open('?download=1&card=' + (assignedIdx + 1), '_blank');
         }
 
         function resetCounter() {
@@ -226,6 +229,29 @@
         // ─────────────────────────────────────────
 
         let marked = new Set();
+
+        function downloadCardImage(idx) {
+            const imgSrc = CARD_IMAGES[idx];
+
+            if (!imgSrc) {
+                document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px;">No image is configured for this bingo variation.</p>';
+                return;
+            }
+
+            const a = document.createElement('a');
+            a.href = imgSrc;
+            a.download = imgSrc.split('/').pop() || ('bingo-card-' + (idx + 1) + '.png');
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            document.body.innerHTML = `
+                <div style="font-family:sans-serif;padding:24px;text-align:center;">
+                    <p>Your bingo card download should begin automatically.</p>
+                    <p><a href="${imgSrc}" download="${a.download}">Tap here if it doesn't.</a></p>
+                </div>
+            `;
+        }
 
         function showCardView(idx) {
             document.getElementById('admin-panel').style.display = 'none';
