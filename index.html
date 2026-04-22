@@ -211,12 +211,28 @@
         let marked = new Set();
 
         function showImageOnlyView(idx) {
-            document.getElementById('admin-panel').style.display = 'none';
-            document.getElementById('card-view').style.display = 'block';
-            document.querySelector('.card-header').style.display = 'none';
-            document.querySelector('.bingo-grid-wrap').style.display = 'none';
-            document.querySelector('.card-footer').style.display = 'none';
-            document.getElementById('win-banner').style.display = 'none';
+            const adminPanel = document.getElementById('admin-panel');
+            const cardView = document.getElementById('card-view');
+            const cardHeader = document.querySelector('.card-header');
+            const gridWrap = document.querySelector('.bingo-grid-wrap');
+            const cardFooter = document.querySelector('.card-footer');
+            const winBanner = document.getElementById('win-banner');
+            const imageWrap = document.getElementById('card-image-wrap');
+
+            adminPanel.style.display = 'none';
+            cardView.style.display = 'block';
+            cardView.style.maxWidth = '720px';
+            cardView.style.padding = '1rem';
+
+            if (cardHeader) cardHeader.style.display = 'none';
+            if (gridWrap) gridWrap.style.display = 'none';
+            if (cardFooter) cardFooter.style.display = 'none';
+            if (winBanner) winBanner.style.display = 'none';
+            if (imageWrap) {
+                imageWrap.style.display = 'flex';
+                imageWrap.style.marginBottom = '0';
+            }
+
             buildCardImage(idx);
         }
 
