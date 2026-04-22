@@ -11,9 +11,7 @@
 
 <body>
 
-    <!-- ═══════════════════════════════════════
-     ADMIN PANEL  (shown when no ?card= param)
-════════════════════════════════════════ -->
+    <!-- ADMIN PANEL  (shown when no ?card= param) -->
     <div id="admin-panel">
         <div class="admin-header">
             <div class="badge">Admin · One QR · Auto-Cycle</div>
@@ -59,9 +57,12 @@
             <div class="card-num" id="card-label"></div>
         </div>
 
-        <div class="win-banner" id="win-banner">🎉 BINGO! 🎉</div>
+        <div class="win-banner" id="win-banner"> BINGO! </div>
 
         <div class="bingo-image-wrap" id="card-image-wrap"></div>
+        <div class="image-only-actions" id="image-only-actions">
+            <a class="btn primary" id="download-card-link" href="#" download>Download Card Image</a>
+        </div>
 
         <div class="bingo-grid-wrap">
             <div class="bingo-header-row">
@@ -95,9 +96,7 @@
         const TOTAL_CARDS = 5;
         const STORAGE_KEY = 'bingo_scan_count';
 
-        // ─────────────────────────────────────────
-        //  ROUTING
-        // ─────────────────────────────────────────
+        // -------------------------------- ROUTING -------------------------------- 
 
         const params = new URLSearchParams(location.search);
 
@@ -116,9 +115,7 @@
             buildAdminPanel();
         }
 
-        // ─────────────────────────────────────────
-        //  COUNTER
-        // ─────────────────────────────────────────
+        // -------------------------------- COUNTER -------------------------------- 
 
         function getScanCount() {
             return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
@@ -130,9 +127,7 @@
             return next;
         }
 
-        // ─────────────────────────────────────────
-        //  ADMIN PANEL
-        // ─────────────────────────────────────────
+        // -------------------------------- ADMIN PANEL -------------------------------- 
 
         function buildAdminPanel() {
             document.getElementById('admin-panel').style.display = 'block';
@@ -204,9 +199,7 @@
             window.print();
         }
 
-        // ─────────────────────────────────────────
-        //  CARD VIEW
-        // ─────────────────────────────────────────
+        // -------------------------- CARD VIEW -----------------------------------
 
         let marked = new Set();
 
@@ -218,6 +211,9 @@
             const cardFooter = document.querySelector('.card-footer');
             const winBanner = document.getElementById('win-banner');
             const imageWrap = document.getElementById('card-image-wrap');
+            const imageOnlyActions = document.getElementById('image-only-actions');
+            const downloadCardLink = document.getElementById('download-card-link');
+            const imgSrc = CARD_IMAGES[idx];
 
             adminPanel.style.display = 'none';
             cardView.style.display = 'block';
@@ -230,7 +226,12 @@
             if (winBanner) winBanner.style.display = 'none';
             if (imageWrap) {
                 imageWrap.style.display = 'flex';
-                imageWrap.style.marginBottom = '0';
+                imageWrap.style.marginBottom = '1rem';
+            }
+            if (imageOnlyActions) imageOnlyActions.style.display = 'flex';
+            if (downloadCardLink && imgSrc) {
+                downloadCardLink.href = imgSrc;
+                downloadCardLink.download = imgSrc.split('/').pop() || ('bingo-card-' + (idx + 1) + '.png');
             }
 
             buildCardImage(idx);
@@ -240,6 +241,7 @@
             document.getElementById('admin-panel').style.display = 'none';
             document.getElementById('card-view').style.display = 'block';
             document.getElementById('card-label').textContent = CARD_NAMES[idx];
+            document.getElementById('image-only-actions').style.display = 'none';
             buildCardImage(idx);
             buildBingoGrid(idx);
         }
@@ -266,9 +268,7 @@
         }
 
     </script>
-    <!-- ═══════════════════════════════════════
-     PRINT SHEET  (only visible when printing)
-════════════════════════════════════════ -->
+    <!-- PRINT SHEET  (only visible when printing) -->
     <div id="print-sheet">
         <h2>Scan for Your Bingo Card</h2>
         <p>Each scan gives you a unique card variation</p>

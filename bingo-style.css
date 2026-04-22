@@ -255,6 +255,12 @@ body {
     display: block;
 }
 
+.image-only-actions {
+    display: none;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
 .placeholder-img {
     display: flex;
     flex-direction: column;
