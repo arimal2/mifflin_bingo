@@ -73,19 +73,14 @@
             buildAdminPanel();
         }
 
-        function getScanCount() {
-            return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-        }
-
         function incrementAndGet() {
-            const next = getScanCount() + 1;
+            const next = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10) + 1;
             localStorage.setItem(STORAGE_KEY, next);
             return next;
         }
 
         function buildAdminPanel() {
             document.getElementById('admin-panel').style.display = 'block';
-            updateCounterDisplay();
 
             const scanUrl = location.origin + location.pathname + '?scan=1';
             setTimeout(() => {
@@ -100,17 +95,9 @@
             }, 80);
         }
 
-        function updateCounterDisplay() {
-            const count = getScanCount();
-            const nextIdx = count % TOTAL_CARDS;
-            document.getElementById('counter-display').textContent = count;
-            document.getElementById('next-card-label').textContent = 'Card ' + (nextIdx + 1);
-        }
-
         function resetCounter() {
             if (confirm('Reset scan counter to 0? The next scan will get Card 1 again.')) {
                 localStorage.setItem(STORAGE_KEY, '0');
-                updateCounterDisplay();
             }
         }
 

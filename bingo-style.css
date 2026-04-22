@@ -14,10 +14,7 @@
     --white: #ffffff;
     --black: #101010;
     --card-bg: #ffffff;
-    --border: #2b2b2b;
     --muted: #5b5b5b;
-    --called: #c5050c;
-    --called-bg: #ffe4e5;
     --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
@@ -77,23 +74,10 @@ body {
     font-weight: 600;
 }
 
-.admin-header .badge {
-    display: inline-block;
-    background: var(--black);
-    color: var(--white);
-    font-family: inherit;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    padding: 5px 12px;
-    border-radius: 999px;
-    margin-bottom: 0.75rem;
-}
-
 .qr-single {
     display: flex;
     gap: 2rem;
-    align-items: stretch;
+    align-items: flex-start;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -111,52 +95,6 @@ body {
     flex: 1 1 360px;
 }
 
-.counter-box {
-    background: var(--black);
-    color: var(--white);
-    border: 2px solid var(--red);
-    border-radius: 16px;
-    padding: 1.3rem 1.6rem;
-    text-align: center;
-    min-width: 220px;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.counter-label {
-    font-family: sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.8;
-    margin-bottom: 0.4rem;
-}
-
-.counter-num {
-    font-family: sans-serif;
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 0.6rem;
-    color: #fff1f1;
-}
-
-.counter-next {
-    font-family: sans-serif;
-    font-size: 0.78rem;
-    opacity: 0.8;
-}
-
-.counter-next strong {
-    display: block;
-    font-size: 1rem;
-    margin-top: 0.2rem;
-    color: var(--white);
-}
-
-.qr-card .label,
 .qr-big-card .label {
     font-size: 0.76rem;
     font-family: inherit;
@@ -165,15 +103,6 @@ body {
     color: var(--red-deep);
     margin-bottom: 0.75rem;
     font-weight: 700;
-}
-
-.qr-card .card-title,
-.qr-big-card .card-title {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--muted);
-    margin-top: 0.8rem;
-    font-family: inherit;
 }
 
 .qr-canvas-wrap {
@@ -254,28 +183,6 @@ body {
     margin: 0 auto;
 }
 
-.card-header {
-    text-align: center;
-    margin-bottom: 1.2rem;
-}
-
-.card-header h2 {
-    font-size: 2rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 800;
-    color: var(--red);
-}
-
-.card-header .card-num {
-    font-family: sans-serif;
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.2rem;
-}
-
 .bingo-image-wrap {
     border: 2px solid var(--black);
     border-radius: 16px;
@@ -327,214 +234,6 @@ body {
     margin-bottom: 0.2rem;
 }
 
-/* Bingo grid */
-.bingo-grid-wrap {
-    border: 2px solid var(--black);
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    box-shadow: var(--shadow);
-}
-
-.bingo-header-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    background: var(--red);
-}
-
-.bingo-header-row span {
-    text-align: center;
-    padding: 0.55rem 0;
-    font-size: 1.15rem;
-    font-weight: bold;
-    letter-spacing: 0.12em;
-    color: var(--white);
-}
-
-.bingo-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    border-top: none;
-}
-
-.bingo-cell {
-    border: 1px solid rgba(16, 16, 16, 0.15);
-    text-align: center;
-    padding: 0.7rem 0.2rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-    font-family: sans-serif;
-    cursor: pointer;
-    transition: background 0.12s, color 0.12s;
-    background: rgba(255, 255, 255, 0.95);
-    user-select: none;
-    position: relative;
-    min-height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.bingo-cell:hover {
-    background: #ffeaea;
-}
-
-.bingo-cell.called {
-    background: var(--called-bg);
-    color: var(--called);
-}
-
-.bingo-cell.called::after {
-    content: '';
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 2.5px solid var(--called);
-    pointer-events: none;
-}
-
-.bingo-cell.free-space {
-    background: #111111;
-    color: var(--white);
-    font-size: 0.62rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-}
-
-.card-footer .info {
-    font-family: inherit;
-    font-size: 0.75rem;
-    color: var(--muted);
-}
-
-.bingo-btn {
-    font-family: inherit;
-    font-size: 0.8rem;
-    padding: 8px 20px;
-    border-radius: 24px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-}
-
-.bingo-btn.reset {
-    background: var(--white);
-    border: 2px solid var(--black);
-    color: var(--ink);
-}
-
-.bingo-btn.bingo {
-    background: var(--red);
-    color: #fff;
-}
-
-.bingo-btn.bingo:hover {
-    background: var(--red-deep);
-}
-
-/* WIN banner */
-.win-banner {
-    display: none;
-    text-align: center;
-    background: var(--red);
-    color: var(--white);
-    padding: 0.9rem;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    animation: pop 0.3s ease;
-    box-shadow: var(--shadow);
-}
-
-@keyframes pop {
-    0% {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* ── PRINT SHEET ─────────────────────────── */
-@media print {
-    @page {
-        margin: 1in;
-    }
-
-    body {
-        background: #fff !important;
-    }
-
-    #admin-panel,
-    #card-view {
-        display: none !important;
-    }
-
-    #print-sheet {
-        display: flex !important;
-    }
-}
-
-#print-sheet {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    font-family: "Trebuchet MS", Arial, sans-serif;
-    color: var(--ink);
-}
-
-#print-sheet h2 {
-    font-size: 1.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 800;
-    margin-bottom: 0.3rem;
-    color: var(--red);
-}
-
-#print-sheet p {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-}
-
-#print-qr-target {
-    border: 2px solid var(--black);
-    padding: 16px;
-    display: inline-block;
-    border-radius: 12px;
-    margin-bottom: 1.2rem;
-    background: #fff;
-}
-
-#print-sheet .print-url {
-    font-family: monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    word-break: break-all;
-    max-width: 320px;
-}
-
 @media (max-width: 640px) {
     .admin-header h1 {
         letter-spacing: 0.1em;
@@ -544,17 +243,11 @@ body {
         padding: 1.25rem 1rem 2rem;
     }
 
-    .qr-big-card,
-    .counter-box {
+    .qr-big-card {
         width: 100%;
     }
 
-    .bingo-header-row span {
-        font-size: 0.95rem;
-    }
-
-    .bingo-cell {
-        min-height: 46px;
-        font-size: 1.05rem;
+    #card-view {
+        padding: 1rem;
     }
 }
