@@ -25,7 +25,6 @@
             <div class="qr-big-card">
                 <div class="label">Scan to get a bingo card</div>
                 <div class="qr-canvas-wrap" id="qr-wrap-main"></div>
-                <div class="card-title">Cards cycle 1 → 2 → 3 → 4 → 5 → 1 → ···</div>
                 <div class="qr-actions" style="margin-top:1rem;">
                     <button class="btn" onclick="simulateScan()">Simulate scan</button>
                     <button class="btn" onclick="resetCounter()">Reset counter</button>
@@ -42,15 +41,12 @@
         </div>
 
         <div class="admin-note">
-            <strong>How it works:</strong> There is only one QR code to print or display. Each time
-            someone scans it, the counter advances and they are automatically sent to the next card
+            <strong>How it works:</strong> Each time someone scans it,
+            the counter advances and they are automatically sent to the next card
             variation — 1, 2, 3, 4, 5, then back to 1.<br><br>
             <strong>Hosting note:</strong> The scan counter is stored in this browser's
             localStorage. Keep this admin page open on your device during the event to track scans.
             For multi-device events, replace localStorage with a small shared backend.<br><br>
-            <strong>Adding real images:</strong> Replace each <code>null</code> in
-            <code>CARD_IMAGES</code> at the top of the script with the path to your bingo card image
-            (e.g. <code>"./card1.png"</code>).
         </div>
     </div>
 
@@ -106,13 +102,13 @@
         const params = new URLSearchParams(location.search);
 
         if (params.get('scan') === '1') {
-            // Someone scanned the QR — increment counter, redirect to their assigned image download
+            // Someone scanned the QR — increment counter, redirect to their assigned image-only view
             const count = incrementAndGet();
             const assignedIdx = (count - 1) % TOTAL_CARDS;
-            location.replace(location.origin + location.pathname + '?download=1&card=' + (assignedIdx + 1));
-        } else if (params.get('download') === '1' && params.get('card') !== null) {
+            location.replace(location.origin + location.pathname + '?image=1&card=' + (assignedIdx + 1));
+        } else if (params.get('image') === '1' && params.get('card') !== null) {
             const idx = Math.min(Math.max(parseInt(params.get('card'), 10) - 1, 0), TOTAL_CARDS - 1);
-            downloadCardImage(idx);
+            showImageOnlyView(idx);
         } else if (params.get('card') !== null) {
             const idx = Math.min(Math.max(parseInt(params.get('card'), 10) - 1, 0), TOTAL_CARDS - 1);
             showCardView(idx);
@@ -166,7 +162,7 @@
             const count = incrementAndGet();
             const assignedIdx = (count - 1) % TOTAL_CARDS;
             updateCounterDisplay();
-            window.open('?download=1&card=' + (assignedIdx + 1), '_blank');
+            window.open('?image=1&card=' + (assignedIdx + 1), '_blank');
         }
 
         function resetCounter() {
@@ -214,27 +210,14 @@
 
         let marked = new Set();
 
-        function downloadCardImage(idx) {
-            const imgSrc = CARD_IMAGES[idx];
-
-            if (!imgSrc) {
-                document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px;">No image is configured for this bingo variation.</p>';
-                return;
-            }
-
-            const a = document.createElement('a');
-            a.href = imgSrc;
-            a.download = imgSrc.split('/').pop() || ('bingo-card-' + (idx + 1) + '.png');
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-
-            document.body.innerHTML = `
-                <div style="font-family:sans-serif;padding:24px;text-align:center;">
-                    <p>Your bingo card download should begin automatically.</p>
-                    <p><a href="${imgSrc}" download="${a.download}">Tap here if it doesn't.</a></p>
-                </div>
-            `;
+        function showImageOnlyView(idx) {
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('card-view').style.display = 'block';
+            document.querySelector('.card-header').style.display = 'none';
+            document.querySelector('.bingo-grid-wrap').style.display = 'none';
+            document.querySelector('.card-footer').style.display = 'none';
+            document.getElementById('win-banner').style.display = 'none';
+            buildCardImage(idx);
         }
 
         function showCardView(idx) {
@@ -247,6 +230,7 @@
 
         function buildCardImage(idx) {
             const wrap = document.getElementById('card-image-wrap');
+            wrap.innerHTML = '';
             const imgSrc = CARD_IMAGES[idx];
             if (imgSrc) {
                 const img = document.createElement('img');
